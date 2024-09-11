@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div class="container">
+        <form action="{{url_for('predict')}} "method="POST" enctype="multipart/form-data" name="validate">
+            Age:<input type="text" name="age" ><br>
+            BMI<input type="text" name="bmi" ><br>
+            Children<input type="text" name="children" ><br>
+            Smoker:<br>Yes<input type="radio" name="smoker" value="Yes">No<input type="radio" name="smoker" value="No"><br>
+            Sex:<br>Male<input type="radio" name="sex" value="Male">Female<input type="radio" name="sex" value="Female"><br>
+            Region:<br>NorthEast<input type="radio" name="region" value="northeast">NorthWest<input type="radio" name="region" value="northwest">SouthEast<input type="radio" name="region" value="southeast">SouthWest<input type="radio" name="region" value="southwest"><br>
+            <input type="submit" name="submit" onclick="validation(event)">
+        </form>
+    </div>
+    <div class="con">
+        <!-- {{table|safe}} -->
+         <br><br><br><span id="span">The predicted medical charge is ${{predict}}</span>
+    </div>
+</body>
+<script>
+    function validation(){
+        
+        let age_re=/^[0-9]+$/;
+        let bmi_re=/^[0-9]*[.]?[0-9]+/
+        let children_re=/^[0-9]+$/;
+        let age=document.validate.age.value;
+        let bmi=document.validate.bmi.value;
+        let children=document.validate.children.value;
+        let sex=document.validate.sex.value;
+        let region=document.validate.region.value;
+        if(age===""|| bmi===""||children===""||sex===""||region===""){
+            event.preventDefault()
+            alert("Enter all the details")
+            return ;
+        }
+
+        if(!age.match(age_re)){
+            event.preventDefault();
+            alert("Invalid age")
+        }
+        if(!children.match(children_re)){
+            event.preventDefault();
+            alert("Invalid Children no")
+       
+        }
+        if(!bmi.match(bmi_re)){
+            event.preventDefault();
+            alert("Invalid BMI")
+        
+        }
+        // document.getElementById('span').style.display="block";
+    }
+       
+</script>
+</html>
