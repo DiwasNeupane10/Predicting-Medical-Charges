@@ -4,23 +4,135 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+           body{
+          background-color: rgba(128, 128, 128,0.3);
+           } 
+           .card-body{
+            background-color: rgba(128, 128, 128,0.1);
+            border: 5px solid black;
+        }
+        .sub{
+            background-color: black;
+            color:white;
+        }
+        .table{
+            border-collapse: collapse;
+        }
+    th, td {
+    border: 1px solid black;
+    padding: 12px;
+    text-align: left;
+}
+    </style>
+
 </head>
 <body>
-    <div class="container">
-        <form action="{{url_for('predict')}} "method="POST" enctype="multipart/form-data" name="validate">
-            Age:<input type="text" name="age" ><br>
-            BMI<input type="text" name="bmi" ><br>
-            Children<input type="text" name="children" ><br>
-            Smoker:<br>Yes<input type="radio" name="smoker" value="Yes">No<input type="radio" name="smoker" value="No"><br>
-            Sex:<br>Male<input type="radio" name="sex" value="Male">Female<input type="radio" name="sex" value="Female"><br>
-            Region:<br>NorthEast<input type="radio" name="region" value="northeast">NorthWest<input type="radio" name="region" value="northwest">SouthEast<input type="radio" name="region" value="southeast">SouthWest<input type="radio" name="region" value="southwest"><br>
-            <input type="submit" name="submit" onclick="validation(event)">
-        </form>
+    <div class="container mt-4 mb-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h1 class="card-title text-center mb-4">Medical Charge Prediction</h1>
+                        <form action="{{url_for('predict')}}" method="POST" enctype="multipart/form-data" name="validate">
+                            <div class="mb-3">
+                                <label for="age" class="form-label">Age:</label>
+                                <input type="text" class="form-control" id="age" name="age">
+                            </div>
+                            <div class="mb-3">
+                                <label for="bmi" class="form-label">BMI:</label>
+                                <input type="text" class="form-control" id="bmi" name="bmi">
+                            </div>
+                            <div class="mb-3">
+                                <label for="children" class="form-label">Children:</label>
+                                <input type="text" class="form-control" id="children" name="children">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Smoker:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="smoker" id="smoker-yes" value="Yes">
+                                    <label class="form-check-label" for="smoker-yes">Yes</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="smoker" id="smoker-no" value="No">
+                                    <label class="form-check-label" for="smoker-no">No</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Sex:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sex" id="sex-male" value="Male">
+                                    <label class="form-check-label" for="sex-male">Male</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="sex" id="sex-female" value="Female">
+                                    <label class="form-check-label" for="sex-female">Female</label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Region:</label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="region" id="region-northeast" value="northeast">
+                                    <label class="form-check-label" for="region-northeast">NorthEast</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="region" id="region-northwest" value="northwest">
+                                    <label class="form-check-label" for="region-northwest">NorthWest</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="region" id="region-southeast" value="southeast">
+                                    <label class="form-check-label" for="region-southeast">SouthEast</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="region" id="region-southwest" value="southwest">
+                                    <label class="form-check-label" for="region-southwest">SouthWest</label>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn sub" name="submit" onclick="validation(event)">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="container-fluid mt-4">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="table-responsive border">
+                    {{table|safe}}
+                </div>
+                <div class="mt-4 text-center">
+                    <span id="span" class="fs-4" style="font-size: large; font-weight: bold;">The predicted medical charge is ${{predict}}</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- <div class="container border mt-4 mb-4 mx-4">
+        <h1 class=" mb-3 text-center"> Medical Charge Prediction</h1>
+        <div class="container justify-content-center mt-3">
+            <form action="{{url_for('predict')}} "method="POST" enctype="multipart/form-data" name="validate">
+                <div class=" row col-12 col-md-8 col-lg-6 text-center">
+                    Age:<input type="text" name="age" >
+                </div>
+                BMI<input type="text" name="bmi" ><br>
+                Children<input type="text" name="children" ><br>
+                Smoker:<br>Yes<input type="radio" name="smoker" value="Yes">No<input type="radio" name="smoker" value="No"><br>
+                Sex:<br>Male<input type="radio" name="sex" value="Male">Female<input type="radio" name="sex" value="Female"><br>
+                Region:<br>NorthEast<input type="radio" name="region" value="northeast">NorthWest<input type="radio" name="region" value="northwest">SouthEast<input type="radio" name="region" value="southeast">SouthWest<input type="radio" name="region" value="southwest"><br>
+                <input type="submit" name="submit" onclick="validation(event)">
+            </form>
+         </div>
     </div>
     <div class="con">
-        <!-- {{table|safe}} -->
+        <div class="con">
+            {{table|safe}}
+        </div>
          <br><br><br><span id="span">The predicted medical charge is ${{predict}}</span>
-    </div>
+    </div> -->
 </body>
 <script>
     function validation(){
@@ -53,8 +165,9 @@
             alert("Invalid BMI")
         
         }
-        // document.getElementById('span').style.display="block";
+      
     }
        
 </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </html>
